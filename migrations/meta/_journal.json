@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1699900495967,
+      "tag": "0000_far_maximus",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1699903122386,
+      "tag": "0001_narrow_captain_midlands",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1699903234121,
+      "tag": "0002_amazing_arachne",
+      "breakpoints": true
+    }
+  ]
+}
