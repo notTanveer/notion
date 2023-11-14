@@ -1,10 +1,10 @@
 import TitleSection from "@/components/title-section";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import Image from 'next/image'
-import Banner from '../../../public/appBanner.png'
+import Image from "next/image";
+import Banner from "../../../public/appBanner.png";
+import Cal from "../../../public/cal.png";
 import { CLIENTS } from "@/lib/constants";
-
 
 const HomePage = () => {
   return (
@@ -39,15 +39,13 @@ const HomePage = () => {
           </Button>
         </section>
         <div className="md:mt-[-90px] sm:w-full w-[750px] flex justify-center items-center mt-[-40px] relative sm:ml-0 ml-[-50px] ">
-          <Image src={Banner}
-          alt="banner"/>
-          <div className="bottom-0 top-[50%] bg-gradient-to-t dark:from-background left-0 right-0 absolute z-10 "> 
-          </div>
+          <Image src={Banner} alt="banner" />
+          <div className="bottom-0 top-[50%] bg-gradient-to-t dark:from-background left-0 right-0 absolute z-10 "></div>
         </div>
       </section>
       <section className="relative">
-        <div className="
-        overflow-hidden 
+        <div
+          className="overflow-hidden 
         flex 
         after:content[''] 
         after:dark:from-brand-dark 
@@ -70,23 +68,27 @@ const HomePage = () => {
         before:w-20 
         before:absolute 
         before:z-10       
-        ">
+        "
+        >
           {[...Array(2)].map((arr) => (
-            <div key={arr} className="
+            <div
+              key={arr}
+              className="
             flex
             flex-now
             animate-slide
-            ">
+            "
+            >
               {CLIENTS.map((client) => (
                 <div
-                key={client.alt}
-                className="relative w-[200px] m-20 shrink-0 flex items-center "
+                  key={client.alt}
+                  className="relative w-[200px] m-20 shrink-0 flex items-center"
                 >
-                  <Image 
-                  src={client.logo}
-                  alt={client.alt}
-                  width={200}
-                  className="object-contain max-w-one"
+                  <Image
+                    src={client.logo}
+                    alt={client.alt}
+                    width={200}
+                    className="object-contain max-w-one"
                   />
                 </div>
               ))}
@@ -94,8 +96,18 @@ const HomePage = () => {
           ))}
         </div>
       </section>
+      <section className="px-4 sm:px-6 flex flex-col relative justify-center items-center">
+        <div className="w-[30%] blur-[120px] rounded-full h-32 absolute bg-brand-primaryPurple/50 -z-10 top-22"/>
+          <TitleSection
+            title="Keep track of all your meetings in one place"
+            subheading="Capture your ideas thoughts and notes in one place."
+            pill="Features"
+          />
+          <div className="mt-10 max-w-[450px] sm:ml-0 rounded-2xl relative flex justify-center items-center border-washed-purple-300 border-opacity-10 ">
+            <Image src={Cal} alt="calendar" className="rounded-2xl" />
+          </div>
+      </section>
     </>
-    
   );
 };
 
