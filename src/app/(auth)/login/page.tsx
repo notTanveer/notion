@@ -79,7 +79,7 @@ const LoginPage = () => {
           className="
         text-foreground/60"
         >
-          An all-In-One Collaboration and Productivity Platform
+          All-In-One Collaboration and Productivity Platform
         </FormDescription>
         <FormField
           disabled={isLoading}
