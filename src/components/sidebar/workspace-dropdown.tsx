@@ -137,6 +137,7 @@ const WorkspaceDropdown: React.FC<WorkspaceDropdownProps> = ({
               items-center 
               gap-2 
               p-2 
+              top-2
               w-full"
               >
                 <article
