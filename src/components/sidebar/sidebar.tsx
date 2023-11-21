@@ -15,6 +15,8 @@ import WorkspaceDropdown from './workspace-dropdown';
 // import PlanUsage from './plan-usage';
 // import NativeNavigation from './native-navigation';
 import { ScrollArea } from '../ui/scroll-area';
+import PlanUsage from './plan-usage';
+import NativeNavigation from './native-navigation';
 // import FoldersDropdownList from './folders-dropdown-list';
 // import UserCard from './user-card';
 
@@ -69,11 +71,11 @@ const Sidebar: React.FC<SidebarProps> = async ({ params, className }) => {
             ...sharedWorkspaces,
           ].find((workspace) => workspace.id === params.workspaceId)}
         />
-        {/* <PlanUsage
+        <PlanUsage
           foldersLength={workspaceFolderData?.length || 0}
           subscription={subscriptionData}
-        /> */}
-        {/* <NativeNavigation myWorkspaceId={params.workspaceId} /> */}
+        />
+        <NativeNavigation myWorkspaceId={params.workspaceId} />
         <ScrollArea
           className="overflow-scroll relative
           h-[450px]
