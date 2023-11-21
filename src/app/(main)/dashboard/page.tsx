@@ -1,13 +1,13 @@
-import React from "react";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-import { create } from "domain";
-import db from "@/lib/supabase/db";
-import { redirect } from "next/navigation";
-import DashboardSetup from "@/components/dashboard-setup/dashboard-setup";
-import { getUserSubscriptionStatus } from "@/lib/supabase/queries";
+import React from 'react';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 
-const Dashboard = async () => {
+import { cookies } from 'next/headers';
+import db from '@/lib/supabase/db';
+import { redirect } from 'next/navigation';
+import DashboardSetup from '@/components/dashboard-setup/dashboard-setup';
+import { getUserSubscriptionStatus } from '@/lib/supabase/queries';
+
+const DashboardPage = async () => {
   const supabase = createServerComponentClient({ cookies });
 
   const {
@@ -27,12 +27,23 @@ const Dashboard = async () => {
 
   if (!workspace)
     return (
-      <div className="bg-background h-screen w-screen flex justify-center items-center">
-        <DashboardSetup user={user} subscription={subscription}></DashboardSetup>
+      <div
+        className="bg-background
+        h-screen
+        w-screen
+        flex
+        justify-center
+        items-center
+  "
+      >
+        <DashboardSetup
+          user={user}
+          subscription={subscription}
+        />
       </div>
     );
 
   redirect(`/dashboard/${workspace.id}`);
 };
 
-export default Dashboard;
+export default DashboardPage;
