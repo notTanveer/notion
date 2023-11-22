@@ -109,7 +109,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       dispatch({
         type: "UPDATE_FOLDER",
         payload: {
-          folder: { title },
+          folder: { title: e.target.value },
           folderId: fid[0],
           workspaceId,
         },
