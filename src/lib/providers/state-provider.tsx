@@ -121,7 +121,7 @@ const appReducer = (
               folders: action.payload.folders.sort(
                 (a, b) =>
                   new Date(a.createdAt).getTime() -
-                  new Date(b.createdAt).getTime()
+                  new Date(b.createdAt).getTime() // Changed schema for workspaces to defaultNow().notNull to solve the problem, basically the schema for created at was a string
               ),
             };
           }
