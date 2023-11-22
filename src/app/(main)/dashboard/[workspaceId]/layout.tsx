@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children, params }) => {
     relative
     overflow-scroll
     "
-      >c
+      >
       {children}
       </div>
     </main>

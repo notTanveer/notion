@@ -9,6 +9,7 @@ import EmojiPicker from "../global/emoji-picker";
 import { updateFolder } from "@/lib/supabase/queries";
 import TooltipComponent from "../global/tooltip-component";
 import { PlusIcon, Trash } from "lucide-react";
+import { useToast } from "../ui/use-toast";
 
 interface DropdownProps {
   title: string;
@@ -29,6 +30,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   ...props
 }) => {
   const supabase = createClientComponentClient();
+  const { toast } = useToast();
   const { state, dispatch, workspaceId } = useAppState();
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
@@ -99,9 +101,21 @@ const Dropdown: React.FC<DropdownProps> = ({
           folder: { iconId: selectedEmoji },
         },
       });
+      const { data, error } = await updateFolder({ iconId: selectedEmoji }, id);
+      if (error) {
+        toast({
+          title: "Error",
+          variant: "destructive",
+          description: "Could not update the emoji for this folder",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "Update emoji for the folder",
+        });
+      }
     }
   };
-
   const folderTitleChange = (e: any) => {
     if (!workspaceId) return;
     const fid = id.split("folder");
