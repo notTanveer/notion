@@ -61,7 +61,7 @@ type Action =
       payload: {
         folder: Partial<appFoldersType>;
         workspaceId: string;
-        folderId: string;
+        folderId: string; 
       };
     }
   | {
