@@ -127,7 +127,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           workspaceId,
           folderId: fid[0],
           fileId: fid[1],
-          file: { title },
+          file: { title: e.target.value },
         },
       });
     }
