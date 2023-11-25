@@ -1,9 +1,12 @@
-import React from 'react'
+export const dynamic = 'force-dynamic'
 
-const WorkspacePage = () => {
-  return (
-    <div>WorkspacePage</div>
-  )
-}
+import { getWorkspaceDetails } from "@/lib/supabase/queries";
+import React from "react";
 
-export default WorkspacePage
+const Workspace = async ({ params }: { params: { workspaceId: string } }) => {
+  const { data, error} = await getWorkspaceDetails(params.workspaceId);
+
+  return <>Workspace</>;
+};
+
+export default Workspace;

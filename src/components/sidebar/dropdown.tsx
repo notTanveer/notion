@@ -258,7 +258,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       clsx(
         'h-full hidden rounded-sm absolute right-0 items-center justify-center',
         {
-          'group-hover/file:block': listType === 'file',
+          'group-hover/file:block': listType === 'file', // added group-hover to fix the folder icon issue.
           'group-hover/folder:block': listType === 'folder',
         }
       ),
@@ -363,8 +363,8 @@ const Dropdown: React.FC<DropdownProps> = ({
           </div>
         </div>
       </AccordionTrigger>
-      <AccordionContent>
-        {state.workspaces
+      <AccordionContent> 
+        {state.workspaces // This helps us render the files inside the folder
           .find((workspace) => workspace.id === workspaceId)
           ?.folders.find((folder) => folder.id === id)
           ?.files.filter((file) => !file.inTrash)
