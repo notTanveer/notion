@@ -57,6 +57,7 @@ import LogoutButton from "../global/logout-button";
 import Link from "next/link";
 import { Bricolage_Grotesque } from "next/font/google";
 import { set } from "zod";
+import { Value } from "@radix-ui/react-select";
 
 const SettingsForm = () => {
   const { toast } = useToast();
@@ -151,6 +152,7 @@ const SettingsForm = () => {
     } else setPermissions(val);
   };
 
+
   //CHALLENGE fetching avatar details
   //WIP Payment Portal redirect
 
@@ -212,10 +214,8 @@ const SettingsForm = () => {
       <>
         <Label htmlFor="permissions">Permissions</Label>
         <Select
-          onValueChange={(val) => {
-            setPermissions(val);
-          }}
-          defaultValue={permissions}
+            onValueChange={onPermissionsChange}
+            value={permissions}
         >
           <SelectTrigger className="w-full h-26 -mt-3">
             <SelectValue />
@@ -347,15 +347,32 @@ const SettingsForm = () => {
             onClick={async () => {
               if (!workspaceId) return;
               await deleteWorkspace(workspaceId);
-              toast({ title: 'Successfully deleted your workspae' });
-              dispatch({ type: 'DELETE_WORKSPACE', payload: workspaceId }); // no braces on payload
-              router.replace('/dashboard');
+              toast({ title: "Successfully deleted your workspae" });
+              dispatch({ type: "DELETE_WORKSPACE", payload: workspaceId }); // no braces on payload
+              router.replace("/dashboard");
             }}
           >
             Delete Workspace
           </Button>
         </Alert>
       </>
+      <AlertDialog open={openAlertMessage}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Changing your workspace to private will remove all your
+              collaborators permanently.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setOpenAlertMessage(false)}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={onClickAlertConfirm}></AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
