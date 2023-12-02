@@ -58,10 +58,13 @@ import Link from "next/link";
 import { Bricolage_Grotesque } from "next/font/google";
 import { set } from "zod";
 import { Value } from "@radix-ui/react-select";
+import { useSubscriptionModal } from "@/lib/providers/subscription-modal-provider";
+import { smallint } from "drizzle-orm/mysql-core";
 
 const SettingsForm = () => {
   const { toast } = useToast();
   const { user, subscription } = useSupabaseUser();
+  const { setOpen } = useSubscriptionModal();
   const router = useRouter();
   const supabase = createClientComponentClient();
   const { state, workspaceId, dispatch } = useAppState();
@@ -152,7 +155,6 @@ const SettingsForm = () => {
     } else setPermissions(val);
   };
 
-
   //CHALLENGE fetching avatar details
   //WIP Payment Portal redirect
 
@@ -208,15 +210,15 @@ const SettingsForm = () => {
           placeholder="Workspace Logok"
           onChange={onChangeWorkspaceLogo}
           // WIP PRO MEMBERSHIP
-          disabled={uploadingLogo}
+          disabled={uploadingLogo || subscription?.status !== "active"}
         />
+        {subscription?.status !== "active" && <small className="text-muted-foreground">
+          To customize your workspace logo, you need to have a Pro Plan.
+        </small> }
       </div>
       <>
         <Label htmlFor="permissions">Permissions</Label>
-        <Select
-            onValueChange={onPermissionsChange}
-            value={permissions}
-        >
+        <Select onValueChange={onPermissionsChange} value={permissions}>
           <SelectTrigger className="w-full h-26 -mt-3">
             <SelectValue />
           </SelectTrigger>
@@ -355,6 +357,83 @@ const SettingsForm = () => {
             Delete Workspace
           </Button>
         </Alert>
+        <p className="flex items-center gap-2 mt-6 ">
+          <UserIcon size={20} /> Profile
+        </p>
+        <Separator />
+        <div className="flex items-center">
+          <Avatar>
+            <AvatarImage src={""} />
+            <AvatarFallback>
+              <CypressProfileIcon />
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col ml-6">
+            <small className="text-muted-foreground cursor-not-allowed">
+              {user?.email}
+            </small>
+            <Label
+              className="text-sm text-muted-foreground"
+              htmlFor="profilePicture"
+            >
+              Profile Picture
+            </Label>
+            <Input
+              name="profilePicture"
+              type="file"
+              accept="image/*"
+              placeholder="Profile Picture"
+              // onChange={onChangeProfilePicture}
+              disabled={uploadingProfilePic}
+            ></Input>
+          </div>
+        </div>
+        <LogoutButton>
+          <div className="flex items-center">
+            <LogOut />
+          </div>
+        </LogoutButton>
+        <p className="flex items-center gap-2 mt-6">
+          <CreditCard size={20} /> Billing & Plan
+        </p>
+        <Separator />
+        <p className="text-muted-foreground">
+          You are currently on a{" "}
+          {subscription?.status === "active" ? "Pro" : "Free"} Plan
+        </p>
+        <Link
+          href="/"
+          target="_blank"
+          className="text-muted-foreground flex flex-row item-center gap-2"
+        >
+          <span>View Plan Details</span>
+          <ExternalLink size={20} />
+        </Link>
+        {subscription?.status === "active" ? (
+          <div>
+            <Button
+              type="button"
+              size="sm"
+              variant="secondary"
+              disabled={loadingPortal}
+              // className={redirectToCustomerPortal}
+            >
+              Manage Subscription
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <Button
+              type="button"
+              size="sm"
+              variant="secondary"
+              className="text-sm mt-4"
+              onClick={() => setOpen(true)}
+            >
+              Start Plan!
+            </Button>
+          </div>
+        )}
       </>
       <AlertDialog open={openAlertMessage}>
         <AlertDialogContent>
@@ -369,7 +448,9 @@ const SettingsForm = () => {
             <AlertDialogCancel onClick={() => setOpenAlertMessage(false)}>
               Cancel
             </AlertDialogCancel>
-            <AlertDialogAction onClick={onClickAlertConfirm}></AlertDialogAction>
+            <AlertDialogAction
+              onClick={onClickAlertConfirm}
+            ></AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

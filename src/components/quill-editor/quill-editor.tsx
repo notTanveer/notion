@@ -697,7 +697,8 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
               p-2
               hover:text-card-foreground
               transition-all
-              rounded-md"
+              rounded-md
+              hover:text-green-500"
             >
               {details.bannerUrl ? 'Update Banner' : 'Add Banner'}
             </BannerUpload>
@@ -715,7 +716,10 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
                 text-muted-foreground
                 w-36
                 p-2
-                rounded-md"
+                rounded-md
+                hover:text-red-600
+                "
+                
               >
                 <XCircleIcon size={16} />
                 <span className="whitespace-nowrap font-normal">
@@ -726,6 +730,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
           </div>
           <span
             className="
+            text-white
             text-muted-foreground
             text-3xl
             font-bold
