@@ -49,7 +49,7 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ products }) => {
       const stripe = await getStripe();
       stripe?.redirectToCheckout({ sessionId });
     } catch (error) {
-      toast({ title: 'Oppse! Something went wrong.', variant: 'destructive' });
+      toast({ title: 'Oppsie! Something went wrong.', variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -83,7 +83,7 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ products }) => {
                   {product.prices?.map((price) => (
                     <React.Fragment key={price.id}>
                       <b className="text-3xl text-foreground">
-                        {formatPrice(price)} / <small>{price.interval}</small>
+                        {formatPrice(price)}/<small>{price.interval}</small>
                       </b>
                       <Button
                         onClick={() => onClickContinue(price)}

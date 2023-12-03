@@ -1,5 +1,4 @@
 import {loadStripe, Stripe} from '@stripe/stripe-js';
-import exp from 'constants';
 
 let stripePromise: Promise<Stripe | null>;
 

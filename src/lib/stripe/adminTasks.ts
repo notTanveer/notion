@@ -3,7 +3,6 @@ import { Price, Product, Subscription } from "../supabase/supabase.types";
 import db from "../supabase/db";
 import { customers, prices, products, users } from "../../../migrations/schema";
 import { stripe } from './index'
-import { use } from "react";
 import { eq } from "drizzle-orm";
 import { toDateTime } from "../utils";
 import { subscriptions } from "../supabase/schema";

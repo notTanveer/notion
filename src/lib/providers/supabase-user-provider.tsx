@@ -9,7 +9,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 type SupabaseUserContextType = {
   user: AuthUser | null;
-  subscription: Subscription | null;
+  subscription: Subscription | null;  
 };
 
 const SupabaseUserContext = createContext<SupabaseUserContextType>({
@@ -50,7 +50,7 @@ export const SupabaseUserProvider: React.FC<SupabaseUserProviderProps> = ({
           toast({
             title: 'Unexpected Error',
             description:
-              'Oppse! An unexpected error happened. Try again later.',
+              'Oppsie! An unexpected error happened. Try again later.',
           });
         }
       }

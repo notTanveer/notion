@@ -1,14 +1,17 @@
-"use client";
-import SubscriptionModal from "@/components/global/subscription-modal";
-import { Cylinder } from "lucide-react";
+'use client';
+import { useToast } from '@/components/ui/use-toast';
 import {
   Dispatch,
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
-} from "react";
-import { ProductWithPrice } from "../supabase/supabase.types";
+} from 'react';
+import { useSupabaseUser } from './supabase-user-provider';
+import { getUserSubscriptionStatus } from '../supabase/queries';
+import SubscriptionModal from '@/components/global/subscription-modal';
+import { ProductWithPrice } from '../supabase/supabase.types';
 
 type SubscriptionModalContextType = {
   open: boolean;
@@ -36,7 +39,7 @@ export const SubscriptionModalProvider = ({
   return (
     <SubscriptionModalContext.Provider value={{ open, setOpen }}>
       {children}
-      <SubscriptionModal products={[]} />
+      <SubscriptionModal products={products} />
     </SubscriptionModalContext.Provider>
   );
 };
